@@ -1,0 +1,82 @@
+<%- include('partials/header'); -%>
+
+<div class="text-center">
+    <h1>World</h1>
+</div>
+
+<% var dateStr = worldData["Date"] %>
+<% var day=dateStr.slice(8,10)%>
+<% var month=dateStr.slice(5,7)%>
+<% var year=dateStr.slice(0,4)%>
+<div class="row text-center">
+    <div class="col">
+        <h2>Last Updated on : <%= day%>/<%=month%>/<%=year%></h2>
+    </div>
+</div>
+
+<% var totalActive = worldData["Global"]["TotalConfirmed"]-worldData["Global"]["TotalDeaths"]-worldData["Global"]["TotalRecovered"]  %>
+
+<div class="row text-center">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color1">
+            <div class="card-body">
+                <h4 class="card-title">Active</h4>
+                <p class="card-text number"><%= totalActive %></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color3">
+            <div class="card-body">
+                <h4 class="card-title">Confirmed</h4>
+                <p class="card-text number"><%= worldData["Global"]["TotalConfirmed"] %></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color2">
+            <div class="card-body">
+                <h4 class="card-title">Deaths</h4>
+                <p class="card-text number"><%= worldData["Global"]["TotalDeaths"] %></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color4">
+            <div class="card-body">
+                <h4 class="card-title">Recovered</h4>
+                <p class="card-text number"><%= worldData["Global"]["TotalRecovered"] %></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover text-center">
+    <thead>
+        <tr class="bg-info text-white">
+            <th scope="col" class="column1">Sno.</th>
+            <th scope="col" class="column2">Country</th>
+            <th scope="col">Active</th>
+            <th scope="col">Confirmed</th>
+            <th scope="col">Death</th>
+            <th scope="col">Recovered</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% for(var i=0;i< worldData["Countries"].length;i++){ %>
+        <% var active = worldData["Countries"][i]["TotalConfirmed"]-worldData["Countries"][i]["TotalDeaths"]-worldData["Countries"][i]["TotalRecovered"]  %>
+
+        <tr>
+            <th scope="row" class="column1"><%= i+1 %></th>
+            <td class="column2"><%= worldData["Countries"][i]["Country"] %></td>
+            <td><%= active %></td>
+            <td><%= worldData["Countries"][i]["TotalConfirmed"] %></td>
+            <td><%= worldData["Countries"][i]["TotalDeaths"] %></td>
+            <td><%= worldData["Countries"][i]["TotalRecovered"] %></td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<%- include('partials/footer'); -%>

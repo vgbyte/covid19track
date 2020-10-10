@@ -1,0 +1,77 @@
+<%- include('partials/header'); -%>
+
+<% var lastIndex=indiaData["tested"].length-1 %>
+<% var dateStr = indiaData["tested"][lastIndex]["updatetimestamp"] %>
+<% var date=dateStr.slice(0,10)%>
+<% var time=dateStr.slice(11,19)%>
+
+<div class="text-center">
+    <h1>India</h1>
+</div>
+<div class="row text-center">
+    <div class="col">
+        <h2>Last Updated on : <%= date%> <span class="time"><%=time%></span></h2>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color1">
+            <div class="card-body">
+                <h4 class="card-title">Active</h4>
+                <p class="card-text number"><%= indiaData["statewise"][0]["active"] %></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color3">
+            <div class="card-body">
+                <h4 class="card-title">Confirmed</h4>
+                <p class="card-text number"><%= indiaData["statewise"][0]["confirmed"] %></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color2">
+            <div class="card-body">
+                <h4 class="card-title">Deaths</h4>
+                <p class="card-text number"><%= indiaData["statewise"][0]["deaths"] %></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="card m-2 color4">
+            <div class="card-body">
+                <h4 class="card-title">Recovered</h4>
+                <p class="card-text number"><%= indiaData["statewise"][0]["recovered"] %></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover text-center">
+    <thead>
+        <tr class="bg-info text-white">
+            <th scope="col" class="column1">Sno.</th>
+            <th scope="col" class="column2">State/UT</th>
+            <th scope="col">Active</th>
+            <th scope="col">Confirmed</th>
+            <th scope="col">Death</th>
+            <th scope="col">Recovered</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% for(var i=1;i< indiaData["statewise"].length;i++){ %>
+        <tr>
+            <th scope="row" class="column1"><%= i %></th>
+            <td class="column2"><%= indiaData["statewise"][i]["state"] %></td>
+            <td><%= indiaData["statewise"][i]["active"] %></td>
+            <td><%= indiaData["statewise"][i]["confirmed"] %></td>
+            <td><%= indiaData["statewise"][i]["deaths"] %></td>
+            <td><%= indiaData["statewise"][i]["recovered"] %></td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<%- include('partials/footer'); -%>
