@@ -17,6 +17,25 @@
 .textSize{
     font-size: 1.25rem;
 }
+.newConfirmed {
+    background-color: #FFA500;
+    color: white;
+}
+
+.totalConfirmed {
+    background-color: #800080;
+    color: white;
+}
+
+.newDeaths {
+    background-color: #FF4136;
+    color: white;
+}
+
+.totalDeaths {
+    background-color: #b83227;
+    color: white;
+}
 .color1{
     background-color: #563d7c;
     color: white;
