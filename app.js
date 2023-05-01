@@ -1,36 +1,37 @@
-var express = require("express");
-var request = require("request");
-var app = express();
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + '/views'));
+const express = require("express")
+const request = require("request")
+const app = express()
+app.set("view engine", "ejs")
+app.use(express.static(__dirname + '/views'))
 
-app.get("/", function (req, res) {
-  request("https://api.covid19india.org/data.json", function (error, response, body) {
+const port = process.env.PORT || 3000
+
+app.get("/india", (req, res) => {
+  request("https://api.covid19india.org/data.json", (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      var indiaData = JSON.parse(body);
-      res.render("india", { indiaData: indiaData });
+      const indiaData = JSON.parse(body)
+      res.render("india", { indiaData: indiaData })
     }
-    else console.log(error);
+    else console.log(error)
   }
-  );
-});
+  )
+})
 
-app.get("/world", function (req, res) {
-  request("https://api.covid19api.com/summary", function (error, response, body) {
+app.get("/", (req, res) => {
+  request("https://api.covid19api.com/summary", (error, response, body) => {
     if (!error && response.statusCode == 200) {
-      var worldData = JSON.parse(body);
-      res.render("world", { worldData: worldData });
+      const worldData = JSON.parse(body)
+      res.render("world", { worldData: worldData })
     }
-    else console.log(error);
+    else console.log(error)
   }
-  );
-});
+  )
+})
 
-app.get("*", function (req, res) {
-  res.redirect("/");
-});
+app.get("*", (req, res) => {
+  res.redirect("/")
+})
 
-var port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("Server Has Started!");
-});
+app.listen(port, () => {
+  console.log(`Server Has Started on port ${port}`)
+})
